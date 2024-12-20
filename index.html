@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Rasmalai!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #333;
+            background: linear-gradient(to bottom, #FFDEE9, #B5FFFC);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #FF69B4;
+            border-radius: 10px;
+            animation: breathe 2s infinite;
+            cursor: pointer;
+        }
+
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: #FFC0CB;
+            border-radius: 10px 10px 0 0;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .party-popper {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #FFD700, transparent);
+            border-radius: 50%;
+            animation: pop 1s ease-out forwards;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.5) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        .message {
+            margin-top: 150px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            display: none;
+        }
+
+        .message h1 {
+            font-size: 3rem;
+            margin: 0 0 15px;
+            color: #FF69B4;
+        }
+
+        .message p {
+            font-size: 1.4rem;
+            margin: 0;
+            color: #555;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-box" id="giftBox"></div>
+    <div class="fireworks" id="fireworksContainer"></div>
+    <div class="message" id="birthdayMessage">
+        <h1>Happy Birthday, Maria, The Rasmalai!</h1>
+        <p>You are the sweetest melody in my life, I Enjoy talking with you.<br>
+           Your are awesome, and your smile lights up my world.<br>
+           May this year bring you endless happiness, love, and laughter.</p>
+        <div class="signature">With all my love, forever yours.</div>
+    </div>
+    <footer>Made with love just for you.</footer>
+
+    <script>
+        const giftBox = document.getElementById('giftBox');
+        const birthdayMessage = document.getElementById('birthdayMessage');
+        const fireworksContainer = document.getElementById('fireworksContainer');
+
+        function createPopper() {
+            console.log("Creating poppers...");
+            for (let i = 0; i < 50; i++) {
+                const popper = document.createElement('div');
+                popper.classList.add('party-popper');
+                popper.style.left = Math.random() * 100 + '%';
+                popper.style.top = Math.random() * 100 + '%';
+                fireworksContainer.appendChild(popper);
+
+                setTimeout(() => {
+                    popper.remove();
+                }, 1000);
+            }
+            console.log("Poppers created.");
+        }
+
+        giftBox.addEventListener('click', () => {
+            console.log("Gift box clicked!");
+            giftBox.style.display = 'none';
+            birthdayMessage.style.display = 'block';
+            createPopper();
+            const audio = new Audio('happy_birthday_song.mp3');
+            audio.play();
+        });
+    </script>
+</body>
+</html>
